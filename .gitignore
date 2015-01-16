@@ -1,0 +1,4 @@
+*.o
+test1-0x00000.bin
+test1-0x40000.bin
+test1
