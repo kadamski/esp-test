@@ -1,6 +1,7 @@
 CC = xtensa-lx106-elf-gcc
-LDFLAGS = -Teagle.app.v6.ld
 CFLAGS = -Os -Iinclude -mlongcalls -g
+CUSTOMLIBDIR =
+LDFLAGS = -Teagle.app.v6.ld -L$(CUSTOMLIBDIR)
 ESPBAUD = 300000
 
 # for SDK 0.9.5
