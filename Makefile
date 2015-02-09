@@ -11,7 +11,7 @@ LDLIBS = -nostdlib -Wl,--start-group -lmain -lupgrade -lnet80211 -lwpa -llwip -l
 # for SDK 0.9.4
 #LDLIBS = -nostdlib -Wl,--start-group -lmain -lupgrade -lnet80211 -lwpa -llwip -lpp -lphy -Wl,--end-group -lcirom -lgcc
 
-$(APP)-0x00000.bin: $(APP).elf
+$(APP).elf-0x00000.bin: $(APP).elf
 	esptool.py elf2image $^
 
 hello1.elf: driver/uart.o hello1/user_main.o
