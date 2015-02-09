@@ -1,3 +1,4 @@
+#include <osapi.h>
 #include "ets_sys.h"
 
 void ICACHE_FLASH_ATTR user_init(void)

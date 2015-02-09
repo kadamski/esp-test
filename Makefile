@@ -1,7 +1,11 @@
 CC = xtensa-lx106-elf-gcc
 CFLAGS = -Os -Iinclude -mlongcalls
-LDLIBS = -nostdlib -Wl,--start-group -lmain -lupgrade -lnet80211 -lwpa -llwip -lpp -lphy -Wl,--end-group -lcirom -lgcc
 LDFLAGS = -Teagle.app.v6.ld
+
+# for SDK 0.9.5
+LDLIBS = -nostdlib -Wl,--start-group -lmain -lupgrade -lnet80211 -lwpa -llwip -lpp -lphy -lat -Wl,--end-group -lcirom -lgcc
+# for SDK 0.9.4
+#LDLIBS = -nostdlib -Wl,--start-group -lmain -lupgrade -lnet80211 -lwpa -llwip -lpp -lphy -Wl,--end-group -lcirom -lgcc
 
 test1-0x00000.bin: test1
 	esptool.py elf2image $^
