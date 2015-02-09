@@ -17,6 +17,9 @@ $(APP)-0x00000.bin: $(APP).elf
 hello1.elf: driver/uart.o hello1/user_main.o
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
+exceptions.elf: driver/uart.o exceptions/user_main.o
+	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+
 flash: $(APP).elf-0x00000.bin
 	esptool.py --baud $(ESPBAUD) write_flash 0 $(APP).elf-0x00000.bin 0x40000 $(APP).elf-0x40000.bin
 
@@ -24,4 +27,4 @@ connect:
 	picocom -b 9600 --omap crcrlf /dev/ttyUSB0
 
 clean:
-	rm test1-0x00000.bin test1-0x40000.bin driver/uart.o hello1/user_main.o
+	rm test1-0x00000.bin test1-0x40000.bin driver/uart.o hello1/user_main.o exceptions/user_main.o
