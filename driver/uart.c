@@ -54,11 +54,6 @@ static void ICACHE_FLASH_ATTR uart0_putc(char c)
     uart_putc(UART0, c);
 }
 
-static void ICACHE_FLASH_ATTR uart1_putc(char c)
-{
-    uart_putc(UART0, c);
-}
-
 void ICACHE_FLASH_ATTR uart_init(int baud)
 {
     uart_config(baud);
