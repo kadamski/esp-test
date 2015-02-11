@@ -23,6 +23,9 @@ exceptions.elf: driver/uart.o exceptions/user_main.o
 timer1.elf: driver/uart.o timer1/user_main.o
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
+task1.elf: driver/uart.o task1/user_main.o
+	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+
 flash: $(APP).elf-0x00000.bin
 	esptool.py --baud $(ESPBAUD) write_flash 0 $(APP).elf-0x00000.bin 0x40000 $(APP).elf-0x40000.bin
 
@@ -31,3 +34,4 @@ connect:
 
 clean:
 	rm -f *.elf *.elf-0x[04]0000.bin driver/uart.o hello1/user_main.o exceptions/user_main.o timer1/user_main.o
+	rm -f task1/user_main.o
