@@ -41,5 +41,4 @@ connect:
 	picocom -b 9600 --omap crcrlf /dev/ttyUSB0
 
 clean:
-	rm -f *.elf *.elf-0x[04]0000.bin driver/uart.o hello1/user_main.o exceptions/user_main.o timer1/user_main.o
-	rm -f task1/user_main.o
+	rm -f *.elf *.elf-0x[04]0000.bin */*.o
