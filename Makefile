@@ -1,18 +1,23 @@
+SDKVER       ?= "0.9.4"
+APP          ?= hello1
+CUSTOMLIBDIR ?=
+
 CC = xtensa-lx106-elf-gcc
-CUSTOMLIBDIR =
 CFLAGS = -Os -Iinclude -mlongcalls -g -DICACHE_FLASH #-DUSE_OPTIMIZE_PRINTF
 LDFLAGS = -Teagle.app.v6.ld
+ESPBAUD = 300000
+SDKLIBS = main upgrade net80211 wpa lwip pp phy
+
 ifdef $(CUSTOMLIBDIR)
 	LDFLAGS += -L$(CUSTOMLIBDIR)
 endif
-ESPBAUD = 300000
+ifeq ($(SDKVER), "0.9.5")
+	SDKLIBS += at
+endif
 
-APP ?= hello1
-
-# for SDK 0.9.5
-LDLIBS = -nostdlib -Wl,--start-group -lmain -lupgrade -lnet80211 -lwpa -llwip -lpp -lphy -lat -Wl,--end-group -lcirom -lgcc
-# for SDK 0.9.4
-#LDLIBS = -nostdlib -Wl,--start-group -lmain -lupgrade -lnet80211 -lwpa -llwip -lpp -lphy -Wl,--end-group -lcirom -lgcc
+LDLIBS  = -nostdlib -Wl,--start-group
+LDLIBS += $(foreach lib, $(SDKLIBS), -l$(lib))
+LDLIBS += -Wl,--end-group -lcirom -lgcc
 
 $(APP).elf-0x00000.bin: $(APP).elf
 	esptool.py elf2image $^
