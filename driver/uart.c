@@ -59,3 +59,12 @@ void ICACHE_FLASH_ATTR uart_init(int baud)
     uart_config(baud);
     os_install_putc1(uart0_putc);
 }
+
+void uart_flush(int n)
+{
+    int mask = UART_TXFIFO_CNT << UART_TXFIFO_CNT_S;
+
+    while ((READ_PERI_REG(UART_STATUS(n)) & mask) != 0)
+        ;
+
+}

@@ -75,6 +75,7 @@ typedef enum {
 } RcvMsgBuffState;
 
 void uart_init(int baud);
+void uart_flush(int n);
 
 #endif
 
