@@ -1,7 +1,10 @@
 CC = xtensa-lx106-elf-gcc
 CUSTOMLIBDIR =
 CFLAGS = -Os -Iinclude -mlongcalls -g -DICACHE_FLASH #-DUSE_OPTIMIZE_PRINTF
-LDFLAGS = -Teagle.app.v6.ld -L$(CUSTOMLIBDIR)
+LDFLAGS = -Teagle.app.v6.ld
+ifdef $(CUSTOMLIBDIR)
+	LDFLAGS += -L$(CUSTOMLIBDIR)
+endif
 ESPBAUD = 300000
 
 APP ?= hello1
