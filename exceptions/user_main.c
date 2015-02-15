@@ -35,6 +35,8 @@ static void handler(struct XTensa_exception_frame_s *p)
     int cause, epc1, epc2, epc3, stack, excvaddr, depc;
     char *cause_name;
 
+    Cache_Read_Enable(0, 0, 1);
+
     asm volatile("mov %0, a1" : "=r" (stack));
     asm volatile("rsr.exccause %0" : "=r" (cause));
     asm volatile("rsr.epc1 %0" : "=r" (epc1));
