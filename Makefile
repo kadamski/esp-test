@@ -8,10 +8,11 @@ LDFLAGS = -Teagle.app.v6.ld
 ESPBAUD = 300000
 SDKLIBS = main upgrade net80211 wpa lwip pp phy
 
-ifdef $(CUSTOMLIBDIR)
+ifdef CUSTOMLIBDIR
 	LDFLAGS += -L$(CUSTOMLIBDIR)
 endif
 ifeq ($(SDKVER), "0.9.5")
+	CFLAGS += -DUSE_OPTIMIZE_PRINTF
 	SDKLIBS += at
 endif
 
