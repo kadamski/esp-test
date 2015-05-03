@@ -26,6 +26,9 @@ $(APP).elf-0x00000.bin: $(APP).elf
 hello1.elf: driver/uart.o hello1/user_main.o
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
+wifi1.elf: driver/uart.o wifi1/user_main.o
+	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+
 blink1.elf: driver/uart.o blink1/user_main.o
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
